@@ -99,17 +99,19 @@ function getPasswordOptions() {
   while (length < 10 || length > 64 || isNaN(length)); 
 } 
 
-getPasswordOptions();
-
 // Function for getting a random element from an array
-function getRandom(arr) {
+function getRandom(arr) {  //make sure to put a name for the array that you will be passing in the brackets
+ return arr[Math.floor(Math.random()*arr.length)]; 
+} // the above allows you to genrate a random number from 
 
-}
 
-// Function to generate password with user input
-function generatePassword() {
+// // Function to generate password with user input
+var lowerCase;
+// function generatePassword() {
+//   getPasswordOptions; 
+//   lowerCase = prompt("Would you like lower case characters in your password?");
 
-}
+// }
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
