@@ -89,9 +89,17 @@ var upperCasedCharacters = [
 ];
 
 // Function to prompt user for password options
-function getPasswordOptions() {
+var length; // declare this variable outside so it can be used globally 
+// however if you declare var length = prompt("Please....") outside the function, you will only be prompted once if the conditions
+//in the do-while loop are not met
+function getPasswordOptions() {  
+	do { 
+    length = prompt("Please choose a password length between 10 and 64");
+  }
+  while (length < 10 || length > 64 || isNaN(length)); 
+} 
 
-}
+getPasswordOptions();
 
 // Function for getting a random element from an array
 function getRandom(arr) {
