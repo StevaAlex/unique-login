@@ -89,30 +89,73 @@ var upperCasedCharacters = [
 ];
 
 // Function to prompt user for password options
-var length; // declare this variable outside so it can be used globally 
+var passwordLength; // declare this variable outside so it can be used globally 
 // however if you declare var length = prompt("Please....") outside the function, you will only be prompted once if the conditions
 //in the do-while loop are not met
-function getPasswordOptions() {  
-	do { 
-    length = prompt("Please choose a password length between 10 and 64");
+function getPasswordOptions() {
+  do {
+   passwordLength = prompt("Please choose a password length between 10 and 64");
   }
-  while (length < 10 || length > 64 || isNaN(length)); 
-} 
+  while (passwordLength < 10 || passwordLength > 64 || isNaN(passwordLength));
+}
+
+getPasswordOptions(); 
 
 // Function for getting a random element from an array
 function getRandom(arr) {  //make sure to put a name for the array that you will be passing in the brackets
- return arr[Math.floor(Math.random()*arr.length)]; 
-} // the above allows you to genrate a random number that is the array.length(minus 1)
+  return arr[Math.floor(Math.random() * arr.length)];
+} // the above allows you to genrate a random number that is the array.length
 // this gives you the array[index] element
+ 
+// console.log("my random number" + getRandom(numericCharacters));
+// // Function to generate password with user input 
 
 
-// // Function to generate password with user input
-var lowerCase;
-// function generatePassword() {
-//   getPasswordOptions; 
-//   lowerCase = prompt("Would you like lower case characters in your password?");
+var passwordFinal= ''; //put this '' to make it a string so when concatenating it doesn't add numbers
+var specialCharSelected = confirm ("Would you like special characters in your password?"); //confirm produces a boolean result
+var numericCharSelected = confirm("Would you like numbers in your password?"); 
+var upperCaseSelected = confirm("Would you like upper case characters in your password?"); 
+var lowerCaseSelected = confirm("Would you like lower case characters in your password?"); 
+var counter = 0;//add this var that allows you to track the type of characters that == true 
+// that way you can calculate how many times the loop in generate2ndPassword runs for
+//so if someone chose 'ok' or true for 3 choices, then counter=3 and if they chose a length of 10, the loop runs 7 times
+function generatePassword() {  
 
-// }
+  if (specialCharSelected == true) { 
+   passwordFinal += getRandom(specialCharacters);//if ==true generate random array selection and concat to 
+   counter++;
+  } 
+  if ( numericCharSelected == true) { 
+    passwordFinal += getRandom(numericCharacters);
+    counter++;
+  }
+  if ( upperCaseSelected== true) { 
+    passwordFinal += getRandom(upperCasedCharacters);
+    counter++;
+  } 
+  if ( lowerCaseSelected== true) { 
+    passwordFinal += getRandom(lowerCasedCharacters);
+    counter++;
+}
+}   
+
+generatePassword(); //call the first function before calling the other function as values 1st function affect the 2nd
+
+var charactersCombined = specialCharacters.concat(numericCharacters, lowerCasedCharacters, upperCasedCharacters); 
+//use concat so that numbers arent added together, it just lists them
+
+function generate2ndPassword() { 
+  for (var i = 0; i < passwordLength - counter ; i++ ) { 
+   passwordFinal+=  getRandom(charactersCombined);
+  }
+} 
+
+
+generate2ndPassword(); 
+console.log("overall password: " + passwordFinal); //works! 
+//find a way to randomise passwordFinal, make it hack proof!! 
+//it currently does character, number, upper case and lower case in that order everytime so it needs to be randomised
+
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
