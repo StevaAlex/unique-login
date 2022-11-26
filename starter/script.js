@@ -160,10 +160,7 @@ function generateOverallPassword() {
 
 
 
-generateOverallPassword(); 
-console.log("overall password: " + passwordFinal); //works! 
-//find a way to randomise passwordFinal, make it hack proof!! 
-//it currently does character, number, upper case and lower case in that order everytime so it needs to be randomised
+generateOverallPassword(); //call your function
 
 
 // Get references to the #generate element
